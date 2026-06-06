@@ -343,7 +343,7 @@
     initReveal(); initCounters(); initChart(); initNav(); initFAQ(); initPricing(); initForm(); initNews();
     initServices(); initPhases();
     var refresh = initScene();
-    window.__ather = { refresh: refresh };
+    window.__aether = { refresh: refresh };
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();

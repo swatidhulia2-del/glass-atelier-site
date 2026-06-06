@@ -1,4 +1,4 @@
-/* Ather sub-pages — scroll reveal + nav shadow + filter chips + smooth TOC */
+/* Aether sub-pages — scroll reveal + nav shadow + filter chips + smooth TOC */
 (function () {
   "use strict";
   function reveal() {
