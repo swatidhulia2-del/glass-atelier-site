@@ -420,7 +420,7 @@ body.no-motion .reveal { opacity: 1 !important; transform: none !important; tran
 .scene { position: relative; height: 250vh; }
 .scene-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 .scene-layer { position: absolute; inset: 0; }
-.scene .hero { height: 100%; min-height: 0; padding: clamp(120px, 15vh, 260px) 0 clamp(40px, 6vh, 120px); display: flex; flex-direction: column; justify-content: center; }
+.scene .hero { height: 100%; min-height: 0; padding: clamp(150px, 17vh, 300px) 0 clamp(40px, 6vh, 120px); display: flex; flex-direction: column; justify-content: flex-start; }
 .scene .hero .wrap { will-change: transform, opacity; }
 .scene .statement { height: 100%; min-height: 0; display: flex; align-items: center; justify-content: center; will-change: opacity; }
 .scene .statement .band { will-change: transform, opacity; }
