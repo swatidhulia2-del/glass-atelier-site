@@ -1,5 +1,5 @@
 /* ============================================================
-   ATHER — Glass Atelier motion (ported from index.html)
+   AETHER — Glass Atelier motion (ported from index.html)
    pinned hero→statement takeover · curtain-split reveal ·
    scroll reveals · counters · chart · accordion · pricing · form
    ============================================================ */
@@ -12,7 +12,7 @@
   function initReveal() {
     var sel = ".sec-head, .chart-card, .results-foot, .svc-left, .svc-right, .qcard, .testi > div:first-child,"
       + " .phase, .member, .stat, .stat-cta, .price-select, .price-detail, .cs-card, .cs-photo, .cs-cta,"
-      + " .qw-card, .ins-intro, .ins-card, .faq-box, .faq-contact, .contact-left, .form-card, .footer-grid > *, .wordmark, .svc-row";
+      + " .qw-card, .ins-intro, .ins-card, .faq-box, .faq-contact, .contact-left, .form-card, .footer-grid > *, .wordmark, .svc-row, .svc-card2";
     var els = [];
     document.querySelectorAll(sel).forEach(function (e) {
       if (e.closest("[data-scene]") || e.closest("[data-fold3]")) return; // own motion
@@ -20,7 +20,7 @@
       els.push(e);
     });
     // stagger siblings within a grid/row
-    [".phase-row", ".team-grid", ".stat-grid", ".qw-grid", ".ins-grid", ".svc-list"].forEach(function (g) {
+    [".phase-row", ".team-grid", ".stat-grid", ".qw-grid", ".ins-grid", ".svc-list", ".svc-cards"].forEach(function (g) {
       document.querySelectorAll(g).forEach(function (grid) {
         var i = 0;
         Array.prototype.forEach.call(grid.children, function (c) {
@@ -245,52 +245,25 @@
     return update;
   }
 
-  /* ---- services: pinned card-deck that shuffles on scroll ---- */
+  /* ---- services: pinned horizontal scroll (cards slide; readable) ---- */
   function initServices() {
-    var sec = document.querySelector("[data-svcdeck]");
+    var sec = document.querySelector("[data-hscroll]");
     if (!sec) return;
-    var cards = sec.querySelectorAll(".svc-card");
-    var now = sec.querySelector(".svc-now");
-    var bar = sec.querySelector(".svc-bar i");
-    var n = cards.length;
+    var track = sec.querySelector(".hs-track");
+    if (!track) return;
     var ticking = false;
-    function clear() {
-      cards.forEach(function (c) { c.style.transform = ""; c.style.opacity = ""; c.style.zIndex = ""; c.style.pointerEvents = ""; });
-    }
     function upd() {
       ticking = false;
       if (window.innerWidth <= 980 || document.body.classList.contains("no-motion")) {
-        clear();
-        if (now) now.textContent = "01";
-        if (bar) bar.style.width = (100 / n) + "%";
-        return;
+        track.style.transform = ""; return;
       }
       var vh = window.innerHeight;
       var r = sec.getBoundingClientRect();
       var total = sec.offsetHeight - vh;
       var p = total > 0 ? Math.min(Math.max(-r.top, 0), total) / total : 0;
-      var f = p * (n - 1);
-      var active = Math.round(f);
-      cards.forEach(function (c, i) {
-        var rel = i - f;                     // <0 leaving, 0 active, >0 stacked behind
-        var x, y, rot, sc, op, z;
-        if (rel < 0) {                       // sliding off to the left, rotating
-          var t = Math.min(1, -rel / 0.62);
-          x = -t * 128; y = t * -10; rot = -t * 13; sc = 1 - t * 0.06; op = 1 - t;
-          z = 200 - i;
-        } else {                             // stacked behind the active card
-          var d = Math.min(rel, 3);
-          x = d * 4; y = d * 18; rot = d * 3.2; sc = 1 - d * 0.05;
-          op = rel > 3.1 ? 0 : 1 - d * 0.14;
-          z = Math.round(100 - rel * 10);
-        }
-        c.style.transform = "translate3d(" + x + "%," + y + "px,0) rotate(" + rot + "deg) scale(" + sc + ")";
-        c.style.opacity = op;
-        c.style.zIndex = z;
-        c.style.pointerEvents = (Math.abs(rel) < 0.5) ? "auto" : "none";
-      });
-      if (now) now.textContent = ("0" + (active + 1)).slice(-2);
-      if (bar) bar.style.width = (((active + 1) / n) * 100) + "%";
+      var dist = track.scrollWidth - track.clientWidth;   // how far to slide
+      if (dist < 0) dist = 0;
+      track.style.transform = "translateX(" + (-p * dist) + "px)";
     }
     function onScroll() { if (!ticking) { requestAnimationFrame(upd); ticking = true; } }
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -343,7 +316,7 @@
     initReveal(); initCounters(); initChart(); initNav(); initFAQ(); initPricing(); initForm(); initNews();
     initServices(); initPhases();
     var refresh = initScene();
-    window.__aether = { refresh: refresh };
+    window.__ather = { refresh: refresh };
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
