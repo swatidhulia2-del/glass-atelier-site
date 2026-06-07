@@ -1,5 +1,5 @@
 /* ============================================================
-   ATHER — GLASS ATELIER (full-page static design comp)
+   AETHER — GLASS ATELIER (full-page static design comp)
    Soft light studio · warm gradient field · frosted glass ·
    pastel orbs · green accent. Design only — no motion.
    ============================================================ */
@@ -420,7 +420,7 @@ body.no-motion .reveal { opacity: 1 !important; transform: none !important; tran
 .scene { position: relative; height: 250vh; }
 .scene-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 .scene-layer { position: absolute; inset: 0; }
-.scene .hero { height: 100%; min-height: 0; padding: clamp(150px, 17vh, 300px) 0 clamp(40px, 6vh, 120px); display: flex; flex-direction: column; justify-content: flex-start; }
+.scene .hero { height: 100%; min-height: 0; padding: clamp(150px, 17vh, 300px) 0 clamp(40px, 6vh, 110px); display: flex; flex-direction: column; justify-content: flex-start; }
 .scene .hero .wrap { will-change: transform, opacity; }
 .scene .statement { height: 100%; min-height: 0; display: flex; align-items: center; justify-content: center; will-change: opacity; }
 .scene .statement .band { will-change: transform, opacity; }
@@ -542,6 +542,20 @@ button.pill { font-family: inherit; cursor: pointer; border: none; }
   .wc-cards .ba-card { min-height: 0; }
   .wc-orb { display: none; }
 }
+
+/* ============ STAKES (16b) ============ */
+.stakes { background: var(--ink); color: #fff; text-align: center; }
+.stakes .wrap { max-width: 980px; }
+.stakes-eyebrow { color: var(--accent); }
+.stakes-title { margin-top: 16px; font-size: clamp(30px, 4.4vw, 52px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; max-width: 18ch; margin-left: auto; margin-right: auto; }
+.stakes-grid { margin-top: 52px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; }
+.stake { padding: 28px; border-radius: var(--r); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+.stake-n { display: inline-grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 20px; font-weight: 700; }
+.stake h4 { margin-top: 18px; font-size: 19px; font-weight: 700; }
+.stake p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); }
+.stakes-foot { margin-top: 40px; font-size: clamp(17px, 2vw, 22px); font-weight: 600; color: #fff; }
+.stakes-foot::before { content: ""; display: block; width: 40px; height: 3px; border-radius: 3px; background: var(--accent); margin: 0 auto 24px; }
+@media (max-width: 760px) { .stakes-grid { grid-template-columns: 1fr; } }
 
 /* ============================================================
    PHONES — cheap Android (320–360) · iPhone 11→17 Pro (390–430)
